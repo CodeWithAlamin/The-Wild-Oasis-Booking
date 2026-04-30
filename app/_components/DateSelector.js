@@ -10,6 +10,7 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { useReservation } from "./ReservationContext";
 import { useEffect, useState } from "react";
+import { formatCurrency } from "../_lib/helpers";
 
 function isAlreadyBooked(range, datesArr) {
   return (
@@ -73,13 +74,17 @@ function DateSelector({ settings, room, bookedDates }) {
           <p className="flex gap-2 items-baseline">
             {discount > 0 ? (
               <>
-                <span className="text-2xl">${regularPrice - discount}</span>
+                <span className="text-2xl">
+                  {formatCurrency(regularPrice - discount)}
+                </span>
                 <span className="line-through font-semibold text-primary-700">
-                  ${regularPrice}
+                  {formatCurrency(regularPrice)}
                 </span>
               </>
             ) : (
-              <span className="text-lg md:text-2xl">${regularPrice}</span>
+              <span className="text-lg md:text-2xl">
+                {formatCurrency(regularPrice)}
+              </span>
             )}
             <span className="">/night</span>
           </p>
@@ -93,7 +98,7 @@ function DateSelector({ settings, room, bookedDates }) {
                   Total
                 </span>{" "}
                 <span className="text-lg md:text-2xl font-semibold">
-                  ${roomPrice}
+                  {formatCurrency(roomPrice)}
                 </span>
               </p>
             </>
